@@ -9,6 +9,7 @@
   position: relative;
   margin: 0 auto;
 }
+
 .page__content {
   display: flex;
   flex-direction: column;
