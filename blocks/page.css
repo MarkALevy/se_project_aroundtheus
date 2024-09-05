@@ -17,8 +17,6 @@
   padding-right: 19px;
 }
 
-@media screen and (max-width: 780px) {
-}
 @media screen and (max-width: 580px) {
   .page__content {
     margin-left: auto;

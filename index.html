@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around the U.S.</title>
     <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="./vendor/normalize.css" />
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
@@ -26,110 +25,118 @@
           />
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
-            <button class="profile__edit-button"></button>
+            <button
+              type="button"
+              aria-label="Edit"
+              class="profile__edit-button"
+            ></button>
 
-            <h2 class="profile__description">Explorer</h2>
+            <p class="profile__description">Explorer</p>
           </div>
-          <button class="profile__add-button"></button>
+          <button
+            type="button"
+            aria-label="Add"
+            class="profile__add-button"
+          ></button>
         </section>
         <section class="cards">
           <ul class="cards__list">
-            <li class="cards__list_item card">
+            <li class="card">
               <img
                 src="./images/yosemite.jpg"
                 alt="Yosemite Valley"
                 class="card__image"
               />
               <div class="card__info">
-                <p class="card__title">Yosemite Valley</p>
-                <img
-                  src="./images/like-disabled.svg"
-                  alt="Like"
-                  class="card__like-icon"
-                />
+                <h2 class="card__title">Yosemite Valley</h2>
+                <button
+                  type="button"
+                  aria-label="Like"
+                  class="card__like-button"
+                ></button>
               </div>
             </li>
-            <li class="cards__list_item card">
+            <li class="card">
               <img
                 src="./images/lake-louise.jpg"
                 alt="Lake Louise"
                 class="card__image"
               />
               <div class="card__info">
-                <p class="card__title">Lake Louise</p>
-                <img
-                  src="./images/like-disabled.svg"
-                  alt="Like"
-                  class="card__like-icon"
-                />
+                <h2 class="card__title">Lake Louise</h2>
+                <button
+                  type="button"
+                  aria-label="Like"
+                  class="card__like-button"
+                ></button>
               </div>
             </li>
-            <li class="cards__list_item card">
+            <li class="card">
               <img
                 src="./images/bald-mountains.jpg"
                 alt="Bald Mountains"
                 class="card__image"
               />
               <div class="card__info">
-                <p class="card__title">Bald Mountains</p>
-                <img
-                  src="./images/like-disabled.svg"
-                  alt="Like"
-                  class="card__like-icon"
-                />
+                <h2 class="card__title">Bald Mountains</h2>
+                <button
+                  type="button"
+                  aria-label="Like"
+                  class="card__like-button"
+                ></button>
               </div>
             </li>
-            <li class="cards__list_item card">
+            <li class="card">
               <img
                 src="./images/latemar.jpg"
                 alt="Latemar"
                 class="card__image"
               />
               <div class="card__info">
-                <p class="card__title">Latemar</p>
-                <img
-                  src="./images/like-disabled.svg"
-                  alt="Like"
-                  class="card__like-icon"
-                />
+                <h2 class="card__title">Latemar</h2>
+                <button
+                  type="button"
+                  aria-label="Like"
+                  class="card__like-button"
+                ></button>
               </div>
             </li>
-            <li class="cards__list_item card">
+            <li class="card">
               <img
                 src="./images/vanoise.jpg"
                 alt="Vanoise National Park"
                 class="card__image"
               />
               <div class="card__info">
-                <p class="card__title">Vanoise National Park</p>
-                <img
-                  src="./images/like-disabled.svg"
-                  alt="Like"
-                  class="card__like-icon"
-                />
+                <h2 class="card__title">Vanoise National Park</h2>
+                <button
+                  type="button"
+                  aria-label="Like"
+                  class="card__like-button"
+                ></button>
               </div>
             </li>
-            <li class="cards__list_item card">
+            <li class="card">
               <img
                 src="./images/lago.jpg"
                 alt="Lago di Braies"
                 class="card__image"
               />
               <div class="card__info">
-                <p class="card__title">Lago di Braies</p>
-                <img
-                  src="./images/like-disabled.svg"
-                  alt="Like"
-                  class="card__like-icon"
-                />
+                <h2 class="card__title">Lago di Braies</h2>
+                <button
+                  type="button"
+                  aria-label="Like"
+                  class="card__like-button"
+                ></button>
               </div>
             </li>
           </ul>
         </section>
-        <footer class="footer page__section">
-          <p class="footer__copyright">&copy; 2024 Around The U.S.</p>
-        </footer>
       </main>
+      <footer class="footer page__section">
+        <p class="footer__copyright">&copy; 2024 Around The U.S.</p>
+      </footer>
     </div>
   </body>
 </html>

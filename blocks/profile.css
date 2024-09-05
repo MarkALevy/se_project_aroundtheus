@@ -19,6 +19,7 @@
     "name edit"
     "description description";
   align-items: center;
+  max-width: 420px;
 }
 
 .profile__name {
@@ -27,11 +28,10 @@
   font-weight: 500;
   line-height: 1.2;
   grid-area: name;
-  overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .profile__edit-button {
@@ -47,7 +47,7 @@
   border-color: #fff;
   grid-area: edit;
   margin-left: 18px;
-  margin-right: 18px;
+  transition: opacity 0.25s linear, cursor 0.25s linear;
 }
 
 .profile__description {
@@ -56,12 +56,11 @@
   font-weight: 400;
   line-height: 1.2;
   grid-area: description;
-  max-width: 373px;
-  overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
+  overflow: hidden;
+
+  max-width: 282px;
 }
 
 .profile__add-button {
@@ -74,15 +73,16 @@
   padding: 14px 64px;
   border-radius: 2px;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   border-color: #fff;
   margin-left: auto;
-  transition: width 0.25s linear;
+  transition: width 0.25s linear, opacity 0.25s linear, cursor 0.25s linear;
   display: block;
 }
 
 .profile__edit-button:hover {
   opacity: 60%;
+  cursor: pointer;
 }
 
 .profile__add-button:hover {
@@ -91,10 +91,17 @@
 }
 
 @media screen and (min-width: 580px) and (max-width: 780px) {
+  .profile__info {
+    max-width: 320px;
+  }
+
   .profile__name {
     font-size: 22px;
   }
 
+  .profile__description {
+    font-size: 14px;
+  }
   .profile__add-button {
     width: 50px;
     padding: 14px 14px;
@@ -106,27 +113,24 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 42px;
   }
 
   .profile__image {
-    margin: 42px 0 0;
+    margin: 0 auto;
   }
 
   .profile__info {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin: 30px auto 36px;
-    text-align: center;
-    justify-content: center;
     max-width: 282px;
+    margin: 30px auto 36px;
+    justify-content: center;
+    align-items: center;
   }
 
   .profile__name {
     font-size: 22px;
-    white-space: wrap;
-
     text-align: center;
+    padding-left: 28px;
   }
 
   .profile__edit-button {
@@ -137,11 +141,14 @@
   }
 
   .profile__add-button {
-    width: 282px;
+    width: 100%;
+    max-width: 282px;
     margin: 0;
   }
 
   .profile__description {
     font-size: 14px;
+
+    text-align: center;
   }
 }
