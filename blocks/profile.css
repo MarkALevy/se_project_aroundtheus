@@ -112,7 +112,7 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 42px;
+    padding: 42px 19px 0;
   }
 
   .profile__image {
