@@ -26,8 +26,6 @@ const lago = {
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
 };
 
-typeof initialCards;
-
 initialCards.push(yosemite);
 initialCards.push(lakeLouise);
 initialCards.push(baldMountains);
