@@ -1,6 +1,4 @@
-//
-let initialCards = [];
-
+const initialCards = [];
 const yosemite = {
   name: "Yosemite Valley",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -25,10 +23,10 @@ const lago = {
   name: "Lago di Braies",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
 };
-
 initialCards.push(yosemite);
 initialCards.push(lakeLouise);
 initialCards.push(baldMountains);
 initialCards.push(latemar);
 initialCards.push(vanoise);
 initialCards.push(lago);
+console.log(initialCards);
