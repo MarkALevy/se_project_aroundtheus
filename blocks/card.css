@@ -42,10 +42,10 @@
   width: 21px;
   height: 18px;
   z-index: 2;
-  transition: opacity 0.25s linear, cursor 0.25s linear;
+  transition: opacity 0.25s linear;
+  cursor: pointer;
 }
 
 .card__like-button:hover {
-  opacity: 50%;
-  cursor: pointer;
+  opacity: 0.5;
 }
