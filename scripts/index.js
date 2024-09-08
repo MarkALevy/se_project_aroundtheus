@@ -26,3 +26,27 @@ const initialCards = [
 ];
 
 console.log(initialCards);
+
+let profileName = document.querySelector(".profile__name").textContent;
+let profileDescription = document.querySelector(
+  ".profile__description"
+).textContent;
+
+function openModal() {
+  document.querySelector(".modal").classList.add("modal_opened");
+  document.querySelector(".modal__input-name").value = profileName;
+  document.querySelector(".modal__input-description").value =
+    profileDescription;
+}
+
+function closeModal() {
+  document.querySelector(".modal").classList.remove("modal_opened");
+}
+
+document
+  .querySelector(".profile__edit-button")
+  .addEventListener("click", openModal);
+
+document
+  .querySelector(".modal__close-button")
+  .addEventListener("click", closeModal);
