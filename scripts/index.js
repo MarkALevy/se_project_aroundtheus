@@ -25,29 +25,28 @@ const initialCards = [
   },
 ];
 
+const profileModal = document.querySelector(".modal");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+const profileEditForm = document.querySelector(".modal__form");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const profileCloseButton = document.querySelector(".modal__close-button");
+const nameInput = document.querySelector("[name='name']");
+const descriptionInput = document.querySelector("[name='description']");
+const cardList = document.querySelector(".cards__list");
+const cardTemplate = document.querySelector("#card").content;
 
-const nameInput = document.querySelector(".modal__input-name");
-const descriptionInput = document.querySelector(".modal__input-description");
+console.log(cardTemplate);
 
 function openModal() {
-  document.querySelector(".modal").classList.add("modal_opened");
+  profileModal.classList.add("modal_opened");
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
 }
 
 function closeModal() {
-  document.querySelector(".modal").classList.remove("modal_opened");
+  profileModal.classList.remove("modal_opened");
 }
-
-document
-  .querySelector(".profile__edit-button")
-  .addEventListener("click", openModal);
-
-document
-  .querySelector(".modal__close-button")
-  .addEventListener("click", closeModal);
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -58,22 +57,21 @@ function handleProfileFormSubmit(evt) {
   closeModal();
 }
 
-document
-  .querySelector(".modal__save-button")
-  .addEventListener("click", handleProfileFormSubmit);
-
 function getCardElement(data) {
-  const cardList = document.querySelector(".cards__list");
-  const cardElement = document.querySelector("#card").content.cloneNode(true);
+  const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
-  const imagePath = data.link;
   cardTitleEl.textContent = data.name;
-  cardImageEl.setAttribute("src", imagePath);
+  cardImageEl.setAttribute("src", data.link);
   cardImageEl.setAttribute("alt", data.name);
-  cardList.append(cardElement);
+  return cardElement;
 }
 
+profileEditButton.addEventListener("click", openModal);
+profileCloseButton.addEventListener("click", closeModal);
+profileEditForm.addEventListener("submit", handleProfileFormSubmit);
+
 for (let card of initialCards) {
-  getCardElement(card);
+  cardElement = getCardElement(card);
+  cardList.append(cardElement);
 }

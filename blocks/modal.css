@@ -84,8 +84,7 @@
   opacity: 0.8;
 }
 
-.modal__input-name,
-.modal__input-description {
+.modal__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 17px;
