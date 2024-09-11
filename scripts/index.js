@@ -34,7 +34,9 @@ const profileCloseButton = document.querySelector("#profile-close");
 const nameInput = document.querySelector("[name='name']");
 const descriptionInput = document.querySelector("[name='description']");
 const cardList = document.querySelector(".cards__list");
-const cardTemplate = document.querySelector("#card").content;
+const cardTemplate = document
+  .querySelector("#card")
+  .content.querySelector(".card");
 const addCardButton = document.querySelector(".profile__add-button");
 const addModal = document.querySelector("#add-modal");
 const addCardForm = document.querySelector("#add-card-form");
@@ -42,8 +44,6 @@ const addCloseButton = document.querySelector("#add-close");
 const cardTitleInput = document.querySelector("[name='place-title']");
 const cardImageInput = document.querySelector("[name='img-link']");
 const addCardCreateButton = document.querySelector(".modal__create-button");
-
-console.log(cardTemplate);
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -62,7 +62,7 @@ function handleProfileFormSubmit(evt) {
   closeModal(profileModal);
 }
 
-function handleAddCArdFormSubmit(evt) {
+function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   const newCard = { name: cardTitleInput.value, link: cardImageInput.value };
   const cardElement = getCardElement(newCard);
@@ -76,23 +76,20 @@ function getCardElement(data) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
-  likeButton.addEventListener("click", handleLikeButtonClick);
+  const deleteButton = cardElement.querySelector(".card__delete-button");
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_enabled");
+  });
+
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
   cardTitleEl.textContent = data.name;
   cardImageEl.setAttribute("src", data.link);
   cardImageEl.setAttribute("alt", data.name);
-
   return cardElement;
-}
-
-profileEditButton.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  descriptionInput.value = profileDescription.textContent;
-  openModal(profileModal);
-});
-
-function handleLikeButtonClick(evt) {
-  const clicked = evt.target;
-  clicked.classList.toggle("card__like-button_enabled");
 }
 
 initialCards.forEach((card) => {
@@ -100,8 +97,14 @@ initialCards.forEach((card) => {
   cardList.append(cardElement);
 });
 
+profileEditButton.addEventListener("click", () => {
+  nameInput.value = profileName.textContent;
+  descriptionInput.value = profileDescription.textContent;
+  openModal(profileModal);
+});
+
 addCardButton.addEventListener("click", () => openModal(addModal));
 profileCloseButton.addEventListener("click", () => closeModal(profileModal));
 profileEditForm.addEventListener("submit", handleProfileFormSubmit);
 addCloseButton.addEventListener("click", () => closeModal(addModal));
-addCardForm.addEventListener("submit", handleAddCArdFormSubmit);
+addCardForm.addEventListener("submit", handleAddCardFormSubmit);
