@@ -60,15 +60,62 @@
         <p class="footer__copyright">&copy; 2024 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal">
+    <div class="modal" id="edit-modal">
       <div class="modal__container">
-        <button type="button" class="modal__close-button"></button>
+        <button
+          type="button"
+          id="profile-close"
+          class="modal__close-button"
+          aria-label="Close"
+        ></button>
         <h2 class="modal__heading">Edit Profile</h2>
         <form class="modal__form">
-          <input type="text" name="name" class="modal__input" />
-          <input type="text" name="description" class="modal__input" />
+          <input
+            type="text"
+            name="name"
+            class="modal__input"
+            placeholder="Name"
+          />
+          <input
+            type="text"
+            name="description"
+            class="modal__input"
+            placeholder="Description"
+          />
           <button type="submit" class="modal__save-button" aria-label="Save">
             Save
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="modal" id="add-modal">
+      <div class="modal__container">
+        <button
+          type="button"
+          id="add-close"
+          class="modal__close-button"
+          aria-label="Close"
+        ></button>
+        <h2 class="modal__heading">New Place</h2>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="place-title"
+            class="modal__input"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            name="img-link"
+            class="modal__input"
+            placeholder="Image link"
+          />
+          <button
+            type="submit"
+            class="modal__create-button"
+            aria-label="Create"
+          >
+            Create
           </button>
         </form>
       </div>

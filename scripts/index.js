@@ -25,27 +25,28 @@ const initialCards = [
   },
 ];
 
-const profileModal = document.querySelector(".modal");
+const profileModal = document.querySelector("#edit-modal");
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
 const profileEditForm = document.querySelector(".modal__form");
 const profileEditButton = document.querySelector(".profile__edit-button");
-const profileCloseButton = document.querySelector(".modal__close-button");
+const profileCloseButton = document.querySelector("#profile-close");
 const nameInput = document.querySelector("[name='name']");
 const descriptionInput = document.querySelector("[name='description']");
 const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card").content;
+const addCardButton = document.querySelector(".profile__add-button");
+const addModal = document.querySelector("#add-modal");
+const addCloseButton = document.querySelector("#add-close");
 
 console.log(cardTemplate);
 
-function openModal() {
-  profileModal.classList.add("modal_opened");
-  nameInput.value = profileName.textContent;
-  descriptionInput.value = profileDescription.textContent;
+function openModal(modal) {
+  modal.classList.add("modal_opened");
 }
 
-function closeModal() {
-  profileModal.classList.remove("modal_opened");
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
 }
 
 function handleProfileFormSubmit(evt) {
@@ -67,9 +68,15 @@ function getCardElement(data) {
   return cardElement;
 }
 
-profileEditButton.addEventListener("click", openModal);
-profileCloseButton.addEventListener("click", closeModal);
+profileEditButton.addEventListener("click", () => {
+  nameInput.value = profileName.textContent;
+  descriptionInput.value = profileDescription.textContent;
+  openModal(profileModal);
+});
+addCardButton.addEventListener("click", () => openModal(addModal));
+profileCloseButton.addEventListener("click", () => closeModal(profileModal));
 profileEditForm.addEventListener("submit", handleProfileFormSubmit);
+addCloseButton.addEventListener("click", () => closeModal(addModal));
 
 for (let card of initialCards) {
   const cardElement = getCardElement(card);
