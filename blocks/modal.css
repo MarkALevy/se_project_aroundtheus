@@ -21,10 +21,26 @@
   color: #000;
   width: 358px;
   max-height: 330px;
-  margin: auto;
+  margin: 90px auto;
   padding: 36px;
   border-radius: 10px;
   position: relative;
+}
+
+.modal__preview {
+  color: #fff;
+  margin: 90px auto;
+  position: relative;
+}
+.modal__preview-image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.modal__preview-text {
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 10px;
 }
 
 .modal__close-button {
