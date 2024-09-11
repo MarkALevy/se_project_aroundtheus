@@ -7,7 +7,6 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-  /* display: flex; */
   padding: 0 19px;
   align-items: center;
   display: none;
@@ -64,7 +63,8 @@
   flex-direction: column;
 }
 
-.modal__save-button {
+.modal__save-button,
+.modal__create-button {
   background-color: #000;
   color: #fff;
   font-size: 18px;
@@ -81,6 +81,10 @@
 }
 
 .modal__save-button:hover {
+  opacity: 0.8;
+}
+
+.modal__create-button:hover {
   opacity: 0.8;
 }
 
