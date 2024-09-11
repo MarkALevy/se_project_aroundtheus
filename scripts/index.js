@@ -71,7 +71,7 @@ profileEditButton.addEventListener("click", openModal);
 profileCloseButton.addEventListener("click", closeModal);
 profileEditForm.addEventListener("submit", handleProfileFormSubmit);
 
-for (let card of initialCards) {
+initialCards.forEach((card) => {
   const cardElement = getCardElement(card);
   cardList.append(cardElement);
-}
+});
