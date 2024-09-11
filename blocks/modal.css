@@ -132,7 +132,8 @@
     margin-bottom: 62px;
   }
 
-  .modal__save-button {
+  .modal__save-button,
+  .modal__create-button {
     font-size: 14px;
     margin-top: 28px;
     max-height: 46px;
