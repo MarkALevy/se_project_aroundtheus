@@ -46,6 +46,10 @@
   cursor: pointer;
 }
 
+.card__like-button_enabled {
+  background-image: url("../images/like-enabled.svg");
+}
+
 .card__like-button:hover {
   opacity: 0.5;
 }

@@ -75,9 +75,12 @@ function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  likeButton.addEventListener("click", handleLikeButtonClick);
   cardTitleEl.textContent = data.name;
   cardImageEl.setAttribute("src", data.link);
   cardImageEl.setAttribute("alt", data.name);
+
   return cardElement;
 }
 
@@ -86,6 +89,11 @@ profileEditButton.addEventListener("click", () => {
   descriptionInput.value = profileDescription.textContent;
   openModal(profileModal);
 });
+
+function handleLikeButtonClick(evt) {
+  const clicked = evt.target;
+  clicked.classList.toggle("card__like-button_enabled");
+}
 
 initialCards.forEach((card) => {
   const cardElement = getCardElement(card);
