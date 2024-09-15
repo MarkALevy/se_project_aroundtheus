@@ -43,11 +43,11 @@ const addCardForm = document.forms["add-card-form"];
 const addCloseButton = document.querySelector("#add-close");
 const cardTitleInput = document.querySelector("[name='place-title']");
 const cardImageInput = document.querySelector("[name='img-link']");
-const addCardCreateButton = document.querySelector(".modal__create-button");
 const previewModal = document.querySelector("#preview-modal");
 const previewCloseButton = document.querySelector("#preview-close");
 const previewImage = previewModal.querySelector(".modal__preview-image");
 const previewText = previewModal.querySelector(".modal__preview-text");
+const addCardCreateButton = document.querySelector("#create");
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -55,6 +55,22 @@ function openModal(modal) {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+}
+
+function handleEscape(evt) {
+  if (evt.key === "Escape") {
+    const modalOpened = document.querySelector(".modal_opened");
+    if (modalOpened) {
+      closeModal(modalOpened);
+    }
+  }
+}
+
+function handleOverlayClick(evt) {
+  const modalOpened = document.querySelector(".modal_opened");
+  if (evt.target.classList.contains("modal_opened")) {
+    closeModal(modalOpened);
+  }
 }
 
 function handleProfileFormSubmit(evt) {
@@ -73,6 +89,7 @@ function handleAddCardFormSubmit(evt) {
   cardList.prepend(cardElement);
   closeModal(addModal);
   addCardForm.reset();
+  disableButton(addCardCreateButton, config);
 }
 
 function getCardElement(data) {
@@ -120,3 +137,5 @@ profileEditForm.addEventListener("submit", handleProfileFormSubmit);
 addCloseButton.addEventListener("click", () => closeModal(addModal));
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 previewCloseButton.addEventListener("click", () => closeModal(previewModal));
+addEventListener("keydown", handleEscape);
+addEventListener("click", handleOverlayClick);

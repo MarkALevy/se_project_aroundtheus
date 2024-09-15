@@ -19,6 +19,7 @@
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
+  cursor: pointer;
 }
 
 .modal__container {
@@ -84,8 +85,7 @@
   flex-direction: column;
 }
 
-.modal__save-button,
-.modal__create-button {
+.modal__save-button {
   background-color: #000;
   color: #fff;
   font-size: 18px;
@@ -93,31 +93,51 @@
   font-weight: 400;
   width: 100%;
   max-height: 50px;
-  margin: 31px 0 0 0;
+  margin: 18px 0 0 0;
   border-style: none;
   border-radius: 2px;
   padding: 16px 0;
   cursor: pointer;
   transition: opacity 0.25s linear;
+  text-align: center;
+  vertical-align: middle;
 }
 
-.modal__save-button:hover {
+.modal__save-button:hover:not([disabled]) {
   opacity: 0.8;
 }
 
-.modal__create-button:hover {
-  opacity: 0.8;
+.modal__save-button_disabled {
+  opacity: 0.2;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  cursor: default;
 }
 
 .modal__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin-bottom: 17px;
   padding-top: 13px;
   padding-bottom: 13px;
   font-size: 14px;
   line-height: 1.2;
   font-weight: 400;
+}
+.modal__input_type_error {
+  margin-bottom: 0px;
+  border-bottom: 1px solid #ff0000;
+}
+
+.modal__error {
+  padding-top: 5px;
+  height: 30px;
+}
+
+.modal__error_visible {
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 1.2;
 }
 
 @media screen and (max-width: 580px) {
@@ -132,10 +152,10 @@
     margin-bottom: 62px;
   }
 
-  .modal__save-button,
-  .modal__create-button {
+  .modal__save-button {
     font-size: 14px;
-    margin-top: 28px;
+    line-height: 1.2;
+    margin-top: 16px;
     max-height: 46px;
   }
 
