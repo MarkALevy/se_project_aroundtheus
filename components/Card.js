@@ -1,7 +1,7 @@
 export default class Card {
   constructor(data, cardSelector, handleImageClick) {
-    this._name = data.name;
-    this._link = data.link;
+    this.name = data.name;
+    this.link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
   }
@@ -41,9 +41,9 @@ export default class Card {
       ".card__delete-button"
     );
 
-    this._cardTitleEl.textContent = this._name;
-    this._cardImageEl.setAttribute("src", this._link);
-    this._cardImageEl.setAttribute("alt", this._name);
+    this._cardTitleEl.textContent = this.name;
+    this._cardImageEl.setAttribute("src", this.link);
+    this._cardImageEl.setAttribute("alt", this.name);
     this._setEventListeners();
     return this._cardElement;
   }
