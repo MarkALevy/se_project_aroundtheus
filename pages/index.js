@@ -71,7 +71,6 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
   window.removeEventListener("keydown", handleEscape);
   modal.removeEventListener("click", handleOverlayClick);
-  if (modal === profileModal) formValidators["profile-form"].resetValidation();
 }
 
 function handleEscape(evt) {
@@ -107,7 +106,7 @@ function handleAddCardFormSubmit(evt) {
   );
   closeModal(addModal);
   addCardForm.reset();
-  formValidators["add-card-form"].resetValidation();
+  formValidators["add-card-form"].disableButton();
 }
 
 //Handle modal triggers
@@ -119,6 +118,7 @@ function imageClick(data) {
 }
 
 profileEditButton.addEventListener("click", () => {
+  formValidators["profile-form"].resetValidation();
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
   openModal(profileModal);
