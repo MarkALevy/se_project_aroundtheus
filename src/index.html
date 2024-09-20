@@ -4,25 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around the U.S.</title>
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
-        <img
-          src="./images/logo.svg"
-          alt="Around the U.S. logo"
-          class="header__logo"
-        />
+        <img src=<%=require('./images/logo.svg')%> alt="Around the U.S. logo"
+        class="header__logo" />
       </header>
       <main class="content page__section">
         <section class="profile">
-          <img
-            src="./images/jacques-cousteau.jpg"
-            alt="Jacques Cousteau"
-            class="profile__image"
-          />
+          <img src=<%=require('./images/jacques-cousteau.jpg')%> alt="Jacques
+          Cousteau" class="profile__image" />
           <div class="profile__info">
             <h1 class="profile__name">Jacques Cousteau</h1>
             <button
@@ -65,11 +57,11 @@
         <p class="footer__copyright">&copy; 2024 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal" id="edit-modal">
+    <div class="modal" id="profile-modal">
       <div class="modal__container">
         <button
           type="button"
-          id="profile-close"
+          id="profile-modal-close"
           class="modal__close-button"
           aria-label="Close"
         ></button>
@@ -112,7 +104,7 @@
       <div class="modal__container">
         <button
           type="button"
-          id="add-close"
+          id="add-modal-close"
           class="modal__close-button"
           aria-label="Close"
         ></button>
@@ -154,7 +146,7 @@
       <div class="modal__preview">
         <button
           type="button"
-          id="preview-close"
+          id="preview-modal-close"
           class="modal__close-button"
           aria-label="Close"
         ></button>
@@ -162,6 +154,5 @@
         <p class="modal__preview-text"></p>
       </div>
     </div>
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
