@@ -90,7 +90,6 @@ profileEditButton.addEventListener("click", () => {
 
 addCardButton.addEventListener("click", () => {
   addCardPopup.open();
-  addCardPopup.setInputValues();
 });
 
 // Validation
