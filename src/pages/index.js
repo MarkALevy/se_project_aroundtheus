@@ -14,14 +14,9 @@ const profileModal = "#profile-modal";
 const profileName = ".profile__name";
 const profileDescription = ".profile__description";
 const profileEditButton = document.querySelector(".profile__edit-button");
-const nameInput = document.querySelector("[name='userName']");
-const descriptionInput = document.querySelector("[name='userJob']");
-const cardList = document.querySelector(".cards__list");
 const addCardButton = document.querySelector(".profile__add-button");
 const addModal = "#add-modal";
 const addCardForm = document.forms["add-card-form"];
-const cardTitleInput = document.querySelector("[name='cardName']");
-const cardImageInput = document.querySelector("[name='cardLink']");
 const previewModal = "#preview-modal";
 
 //add card section to DOM & add initial cards
@@ -47,13 +42,11 @@ cardSection.renderItems();
 //Submit handling functions
 
 function handleProfileFormSubmit(input) {
-  profileEditPopup.setInputValues(input);
   userInfo.setUserInfo(input);
   profileEditPopup.close();
 }
 
 function handleAddCardFormSubmit(input) {
-  addCardPopup.setInputValues(input);
   const cardElement = createCard(input);
   cardSection.addItem(cardElement, "prepend");
   addCardPopup.close();
@@ -90,12 +83,15 @@ function imageClick(data) {
 
 profileEditButton.addEventListener("click", () => {
   formValidators["profile-form"].resetValidation();
-  nameInput.value = userInfo.userName.textContent;
-  descriptionInput.value = userInfo.userJob.textContent;
+  const input = userInfo.getUserInfo();
+  profileEditPopup.setInputValues(input);
   profileEditPopup.open();
 });
 
-addCardButton.addEventListener("click", () => addCardPopup.open());
+addCardButton.addEventListener("click", () => {
+  addCardPopup.open();
+  addCardPopup.setInputValues();
+});
 
 // Validation
 
