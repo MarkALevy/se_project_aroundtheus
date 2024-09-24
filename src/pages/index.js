@@ -1,7 +1,6 @@
 // Import files
 import "./index.css";
-import { ApiConfig, config, initialCards } from "../utils/constants.js";
-
+import { apiConfig, config, initialCards } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -9,6 +8,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import Api from "../components/Api.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
 //define global variables
 const profileModal = "#profile-modal";
@@ -21,14 +21,11 @@ const addCardButton = document.querySelector(".profile__add-button");
 const addModal = "#add-modal";
 const addCardForm = document.forms["add-card-form"];
 const previewModal = "#preview-modal";
+const deleteModal = "#delete-modal";
 
-//define Api variable
 const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "f0d69ab2-8bea-4a7d-bdd5-7a7d550b52c4",
-    "Content-Type": "application/json",
-  },
+  baseUrl: apiConfig.baseUrl,
+  headers: apiConfig.headers,
 });
 
 // Create user info instance
@@ -48,17 +45,16 @@ api.getUserInfo().then((res) => {
 });
 
 //add card section to DOM & add initial cards
-// api.getInitialCards();
-
-function createCard(cardData) {
-  const card = new Card(cardData, "#card-template", imageClick);
-  return card.getView();
-}
 
 const cardSection = new Section(
   {
-    items: initialCards,
     renderer: (cardData) => {
+      if (cardData.link) {
+        cardData.cardLink = cardData.link;
+      }
+      if (cardData.name) {
+        cardData.cardName = cardData.name;
+      }
       const cardElement = createCard(cardData);
       cardSection.addItem(cardElement, "append");
     },
@@ -66,23 +62,38 @@ const cardSection = new Section(
   ".cards__list"
 );
 
-cardSection.renderItems();
+api.getInitialCards().then((cards) => {
+  cardSection.renderItems(cards);
+});
+
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", imageClick, deleteClick);
+  return card.getView();
+}
 
 //Submit handling functions
 
 function handleProfileFormSubmit(input) {
   userInfo.setUserInfo(input);
+  api.setUserInfo(input);
   profileEditPopup.close();
 }
 
 function handleAddCardFormSubmit(input) {
   const cardElement = createCard(input);
   cardSection.addItem(cardElement, "prepend");
+  api.addNewCard(input);
   addCardPopup.close();
   addCardForm.reset();
   formValidators["add-card-form"].disableButton();
 }
 
+function handleDeleteCardFormSubmit(cardId, card) {
+  api.deleteCard(cardId).then(() => {
+    card.deleteCard();
+    deleteCardPopup.close();
+  });
+}
 // create instances for modals - preview, profile-edit, add-card
 const previewPopup = new PopupWithImage(previewModal);
 
@@ -94,13 +105,25 @@ const profileEditPopup = new PopupWithForm(
 const addCardPopup = new PopupWithForm(addModal, handleAddCardFormSubmit);
 // call setEventlisteners for each popup
 
+const deleteCardPopup = new PopupWithConfirm(
+  deleteModal,
+  handleDeleteCardFormSubmit
+);
+
 previewPopup.setEventListeners();
 profileEditPopup.setEventListeners();
 addCardPopup.setEventListeners();
+deleteCardPopup.setEventListeners();
 
 //handle modal triggers
 function imageClick(data) {
   previewPopup.open(data);
+}
+
+function deleteClick(cardId, card) {
+  deleteCardPopup.open();
+  deleteCardPopup.card = card;
+  deleteCardPopup.cardId = cardId;
 }
 
 profileEditButton.addEventListener("click", () => {
