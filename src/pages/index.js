@@ -1,25 +1,54 @@
 // Import files
 import "./index.css";
-import { initialCards } from "../utils/constants.js";
-import { config } from "../utils/constants.js";
+import { ApiConfig, config, initialCards } from "../utils/constants.js";
+
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
+import Api from "../components/Api.js";
 
 //define global variables
 const profileModal = "#profile-modal";
 const profileName = ".profile__name";
 const profileDescription = ".profile__description";
+const profileImage = ".profile__image";
+const profileImageEl = document.querySelector(profileImage);
 const profileEditButton = document.querySelector(".profile__edit-button");
 const addCardButton = document.querySelector(".profile__add-button");
 const addModal = "#add-modal";
 const addCardForm = document.forms["add-card-form"];
 const previewModal = "#preview-modal";
 
+//define Api variable
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "f0d69ab2-8bea-4a7d-bdd5-7a7d550b52c4",
+    "Content-Type": "application/json",
+  },
+});
+
+// Create user info instance
+const userInfo = new UserInfo({
+  userName: profileName,
+  userJob: profileDescription,
+  UserImg: profileImage,
+});
+
+//receive user info
+api.getUserInfo().then((res) => {
+  userInfo.setUserInfo({
+    userName: res.name,
+    userJob: res.about,
+  });
+  profileImageEl.setAttribute("src", res.avatar);
+});
+
 //add card section to DOM & add initial cards
+// api.getInitialCards();
 
 function createCard(cardData) {
   const card = new Card(cardData, "#card-template", imageClick);
@@ -54,13 +83,7 @@ function handleAddCardFormSubmit(input) {
   formValidators["add-card-form"].disableButton();
 }
 
-// Create user info instance
-const userInfo = new UserInfo({
-  userName: profileName,
-  userJob: profileDescription,
-});
-
-// create instances for modals - preview, profile-edit & add-card
+// create instances for modals - preview, profile-edit, add-card
 const previewPopup = new PopupWithImage(previewModal);
 
 const profileEditPopup = new PopupWithForm(
@@ -69,7 +92,6 @@ const profileEditPopup = new PopupWithForm(
 );
 
 const addCardPopup = new PopupWithForm(addModal, handleAddCardFormSubmit);
-
 // call setEventlisteners for each popup
 
 previewPopup.setEventListeners();

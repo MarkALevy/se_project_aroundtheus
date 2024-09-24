@@ -142,6 +142,27 @@
         </form>
       </div>
     </div>
+    <div class="modal" id="delete-modal">
+      <div class="modal__container">
+        <button
+          type="button"
+          id="delete-modal-close"
+          class="modal__close-button"
+          aria-label="Close"
+        ></button>
+        <h2 class="modal__heading">Are you sure?</h2>
+        <form class="modal__form" id="delete-form" name="delete-form">
+          <button
+            type="submit"
+            id="confirm-delete"
+            class="modal__save-button"
+            aria-label="confirm delete"
+          >
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
     <div class="modal" id="preview-modal">
       <div class="modal__preview">
         <button

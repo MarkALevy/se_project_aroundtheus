@@ -41,3 +41,12 @@ export const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+
+//Api variables
+export const ApiConfig = {
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "4c60eaef-36e2-498d-8440-907e9f786db6",
+    "Content-Type": "application/json",
+  },
+};
