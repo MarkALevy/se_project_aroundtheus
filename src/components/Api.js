@@ -16,9 +16,6 @@ export default class Api {
       .then((res) => this._handleRes(res))
       .then((data) => {
         return data;
-      })
-      .catch((err) => {
-        console.error(err);
       });
   }
 
@@ -27,9 +24,6 @@ export default class Api {
       .then((res) => this._handleRes(res))
       .then((data) => {
         return data;
-      })
-      .catch((err) => {
-        console.error(err);
       });
   }
 
@@ -45,9 +39,6 @@ export default class Api {
       .then((res) => this._handleRes(res))
       .then((data) => {
         return data;
-      })
-      .catch((err) => {
-        console.error(err);
       });
   };
 
@@ -65,7 +56,7 @@ export default class Api {
         return data;
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Failed to add new card", err);
       });
   };
 
@@ -73,32 +64,30 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => this._handleRes(res))
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then((res) => this._handleRes(res));
   };
 
   likeCard = (cardId) => {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then((res) => this._handleRes(res))
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then((res) => this._handleRes(res));
   };
 
   removeLike = (cardId) => {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then((res) => this._handleRes(res))
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then((res) => this._handleRes(res));
+  };
+
+  editProfileImg = (input) => {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: input,
+      }),
+    }).then((res) => this._handleRes(res));
   };
 }
