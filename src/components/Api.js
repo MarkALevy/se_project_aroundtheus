@@ -79,4 +79,26 @@ export default class Api {
         console.error(err);
       });
   };
+
+  likeCard = (cardId) => {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+      .then((res) => this._handleRes(res))
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  removeLike = (cardId) => {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then((res) => this._handleRes(res))
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 }

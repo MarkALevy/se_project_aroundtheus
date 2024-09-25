@@ -55,6 +55,7 @@ const cardSection = new Section(
       if (cardData.name) {
         cardData.cardName = cardData.name;
       }
+
       const cardElement = createCard(cardData);
       cardSection.addItem(cardElement, "append");
     },
@@ -67,7 +68,13 @@ api.getInitialCards().then((cards) => {
 });
 
 function createCard(cardData) {
-  const card = new Card(cardData, "#card-template", imageClick, deleteClick);
+  const card = new Card(
+    cardData,
+    "#card-template",
+    imageClick,
+    deleteClick,
+    likeClick
+  );
   return card.getView();
 }
 
@@ -94,6 +101,21 @@ function handleDeleteCardFormSubmit(cardId, card) {
     deleteCardPopup.close();
   });
 }
+
+function likeClick(cardId, card) {
+  if (!card.isLiked) {
+    api.likeCard(cardId).then((res) => {
+      card.handleLikeIcon();
+      card.isLiked = res.isLiked;
+    });
+  } else {
+    api.removeLike(cardId).then((res) => {
+      card.handleLikeIcon();
+      card.isLiked = res.isLiked;
+    });
+  }
+}
+
 // create instances for modals - preview, profile-edit, add-card
 const previewPopup = new PopupWithImage(previewModal);
 
