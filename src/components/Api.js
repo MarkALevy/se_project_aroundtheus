@@ -54,9 +54,6 @@ export default class Api {
       .then((res) => this._handleRes(res))
       .then((data) => {
         return data;
-      })
-      .catch((err) => {
-        console.error("Failed to add new card", err);
       });
   };
 
