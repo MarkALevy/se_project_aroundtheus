@@ -34,10 +34,13 @@ const api = new Api({
 });
 
 // Create user info instance
-const userInfo = new UserInfo({
-  userName: profileName,
-  userJob: profileDescription,
-});
+const userInfo = new UserInfo(
+  {
+    userName: profileName,
+    userJob: profileDescription,
+  },
+  profileImageEl
+);
 
 //receive user info
 api
@@ -46,9 +49,8 @@ api
     userInfo.setUserInfo({
       userName: res.name,
       userJob: res.about,
+      userImg: res.avatar,
     });
-
-    profileImageEl.setAttribute("src", res.avatar);
   })
   .catch((err) => {
     console.error("Failed to receive user info", err);
@@ -98,14 +100,18 @@ function createCard(cardData) {
 function handleProfileFormSubmit(input, button) {
   api
     .setUserInfo(input)
-    .then((data) =>
-      userInfo.setUserInfo({ userName: data.name, userJob: data.about })
-    )
+    .then((data) => {
+      userInfo.setUserInfo({
+        userName: data.name,
+        userJob: data.about,
+        userImg: data.avatar,
+      });
+      profileEditPopup.close();
+    })
     .catch((err) => {
       console.error("Failed to save changes in user info", err);
     })
     .finally(() => {
-      profileEditPopup.close();
       button.textContent = "Save";
     });
 }
@@ -115,16 +121,16 @@ function handleProfileImgFormSubmit(input, button) {
     .editProfileImg(input.imageLink)
     .then((data) => {
       if (data && data.avatar) {
-        profileImageEl.src = data.avatar;
+        userInfo.setUserInfo({ userImg: data.avatar });
       }
+      profileEditImagePopup.close();
+      editProfileImgForm.reset();
+      formValidators["edit-profile-image-form"].disableButton();
     })
     .catch((err) => {
       console.error("Failed to update profile image:", err);
     })
     .finally(() => {
-      profileEditImagePopup.close();
-      editProfileImgForm.reset();
-      formValidators["edit-profile-image-form"].disableButton();
       button.textContent = "Save";
     });
 }
@@ -134,14 +140,14 @@ function handleAddCardFormSubmit(input, button) {
     .addNewCard(input)
     .then((data) => {
       cardSection.renderItems([data], "prepend");
+      addCardPopup.close();
+      addCardForm.reset();
+      formValidators["add-card-form"].disableButton();
     })
     .catch((err) => {
       console.error("Failed to add new card", err);
     })
     .finally(() => {
-      addCardPopup.close();
-      addCardForm.reset();
-      formValidators["add-card-form"].disableButton();
       button.textContent = "Create";
     });
 }
