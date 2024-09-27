@@ -121,7 +121,11 @@ function handleProfileImgFormSubmit(input, button) {
     .editProfileImg(input.imageLink)
     .then((data) => {
       if (data && data.avatar) {
-        userInfo.setUserInfo({ userImg: data.avatar });
+        userInfo.setUserInfo({
+          userName: data.name,
+          userJob: data.about,
+          userImg: data.avatar,
+        });
       }
       profileEditImagePopup.close();
       editProfileImgForm.reset();

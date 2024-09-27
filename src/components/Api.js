@@ -11,24 +11,27 @@ export default class Api {
     return Promise.reject(`Error: ${res.status}`);
   };
 
+  _request(url, options) {
+    return fetch(url, options).then(this._handleRes);
+  }
+
   getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, { headers: this._headers })
-      .then((res) => this._handleRes(res))
-      .then((data) => {
-        return data;
-      });
+    return this._request(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+    }).then((data) => {
+      return data;
+    });
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, { headers: this._headers })
-      .then((res) => this._handleRes(res))
-      .then((data) => {
-        return data;
-      });
+    return this._request(`${this._baseUrl}/cards`, { headers: this._headers })
+    .then((data) => {
+      return data;
+    });
   }
 
   setUserInfo = ({ userName, userJob }) => {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -36,14 +39,13 @@ export default class Api {
         about: userJob,
       }),
     })
-      .then((res) => this._handleRes(res))
-      .then((data) => {
-        return data;
-      });
+    .then((data) => {
+      return data;
+    });
   };
 
   addNewCard = ({ cardName, cardLink }) => {
-    return fetch(`${this._baseUrl}/cards`, {
+    return this._request(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -51,40 +53,39 @@ export default class Api {
         link: cardLink,
       }),
     })
-      .then((res) => this._handleRes(res))
-      .then((data) => {
-        return data;
-      });
+    .then((data) => {
+      return data;
+    });
   };
 
   deleteCard = (cardId) => {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => this._handleRes(res));
+    });
   };
 
   likeCard = (cardId) => {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._requesth(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-    }).then((res) => this._handleRes(res));
+    });
   };
 
   removeLike = (cardId) => {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => this._handleRes(res));
+    });
   };
 
   editProfileImg = (input) => {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
+    return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: input,
       }),
-    }).then((res) => this._handleRes(res));
+    });
   };
 }
