@@ -24,8 +24,9 @@ export default class Api {
   }
 
   getInitialCards() {
-    return this._request(`${this._baseUrl}/cards`, { headers: this._headers })
-    .then((data) => {
+    return this._request(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+    }).then((data) => {
       return data;
     });
   }
@@ -38,8 +39,7 @@ export default class Api {
         name: userName,
         about: userJob,
       }),
-    })
-    .then((data) => {
+    }).then((data) => {
       return data;
     });
   };
@@ -52,8 +52,7 @@ export default class Api {
         name: cardName,
         link: cardLink,
       }),
-    })
-    .then((data) => {
+    }).then((data) => {
       return data;
     });
   };
@@ -66,7 +65,7 @@ export default class Api {
   };
 
   likeCard = (cardId) => {
-    return this._requesth(`${this._baseUrl}/cards/${cardId}/likes`, {
+    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     });
