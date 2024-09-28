@@ -18,16 +18,12 @@ export default class Api {
   getUserInfo() {
     return this._request(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then((data) => {
-      return data;
     });
   }
 
   getInitialCards() {
     return this._request(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((data) => {
-      return data;
     });
   }
 
